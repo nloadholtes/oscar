@@ -12,14 +12,14 @@ def my_view(request):
 
 @view_config(route_name='checker', renderer='json')
 def main_checker(request):
+    username = request.params.get('username', None)
+    if username is None:
+        raise exc.HTTPBadRequest(body='Missing Username')
     github_data = _check_github(request)
     return github_data
 
 
-def _check_github(request):
-    username = request.params.get('username', None)
-    if username is None:
-        raise exc.HTTPBadRequest(body='Missing Username')
+def _check_github(username):
     repos = requests.get('{}/users/{}/repos'.format(GITHUB_URL, username)).json()
     output = []
     for repo in repos:
@@ -30,6 +30,8 @@ def _check_github(request):
             output.append(dict(name=name, url=repo['html_url'],
                                 num_pulls=len(pull_req), pulls_url=pulls_url))
     print(output)
-    # req = requests.get('{}/repos/{}/{}/pulls'.format(GITHUB_URL, username, repo))
-    # prnm
     return output
+
+
+def _check_bitbucket(username):
+    return {}
