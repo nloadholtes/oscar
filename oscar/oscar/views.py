@@ -3,6 +3,7 @@ from pyramid import exceptions as exc
 import requests
 
 GITHUB_URL = 'https://api.github.com'
+BITBUCKET_URL = 'https://bitbucket.org/api/2.0/repositories'
 
 
 @view_config(route_name='home', renderer='templates/mytemplate.pt')
@@ -34,4 +35,14 @@ def _check_github(username):
 
 
 def _check_bitbucket(username):
-    return {}
+    repos = requests.get('{}/{}'.format(BITBUCKET_URL, username)).json()
+    output = []
+    for repo in repos['values']:
+        name = repo['name']
+        pulls_url = repo['links']['pullrequests']
+        pull_req = requests.get(pulls_url).json()
+        if len(pull_req['valies']) > 0:
+            output.append(dict(name=name, url=repo['links']['html'],
+                               num_pulls=len(pull_req), pulls_url=pulls_url))
+    print(output)
+    return output
