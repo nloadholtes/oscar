@@ -39,9 +39,9 @@ def _check_bitbucket(username):
     output = []
     for repo in repos['values']:
         name = repo['name']
-        pulls_url = repo['links']['pullrequests']
+        pulls_url = repo['links']['pullrequests']['href']
         pull_req = requests.get(pulls_url).json()
-        if len(pull_req['valies']) > 0:
+        if len(pull_req['values']) > 0:
             output.append(dict(name=name, url=repo['links']['html'],
                                num_pulls=len(pull_req), pulls_url=pulls_url))
     print(output)
