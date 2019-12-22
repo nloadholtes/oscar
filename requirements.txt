@@ -13,6 +13,6 @@ repoze.lru==0.6
 requests>=2.20.0
 translationstring==1.1
 venusian==1.0
-waitress==0.8.9
+waitress==1.4.0
 zope.deprecation==4.1.1
 zope.interface==4.1.1
