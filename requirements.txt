@@ -1,5 +1,5 @@
 Chameleon==2.16
-Mako==1.0.0
+Mako==1.2.2
 MarkupSafe==0.23
 PasteDeploy==1.5.2
 Pygments==2.7.4
