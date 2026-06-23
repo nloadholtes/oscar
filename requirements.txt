@@ -3,7 +3,7 @@ Mako==1.3.11
 MarkupSafe==0.23
 PasteDeploy==1.5.2
 Pygments==2.20.0
-WebOb==1.8.8
+WebOb==1.8.10
 oscar==0.0
 pyramid==1.5.1
 pyramid-chameleon==0.3
